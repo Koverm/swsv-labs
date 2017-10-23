@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class GT4500Test {
 
-	private GT4500 ship;	
+	private TestShip ship;
 	
 	@Before
 	public void init(){	
-		this.ship = new GT4500();
+		this.ship = new TestShip();
 	}
 		
 	@Test
@@ -23,8 +23,14 @@ public class GT4500Test {
 	 */
 	public void fireTorpedos_SinglePrimary_Success(){
 		boolean result = ship.fireTorpedos(FiringMode.SINGLE);
-		
+		TorpedoStore pts = mock(TorpedoStore.class);
+		TorpedoStore sts = mock(TorpedoStore.class);
 		assertEquals(true, result);
 	}
-	
+	public class TestShip extends GT4500{
+		public void setTorpedoStore(TorpedoStore primaryTorpedoStore,TorpedoStore secondaryTorpedoStore){
+			this.primaryTorpedoStore = primaryTorpedoStore;
+			this.secondaryTorpedoStore = secondaryTorpedoStore;
+		}
+	}
 }
